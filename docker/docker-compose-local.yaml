@@ -1,0 +1,29 @@
+version: '3'
+
+services:
+  server:
+    container_name: hls-player-server-local
+    image: hls-player-server-local:latest
+    restart: always
+    environment:
+      - ENV=local
+      - TZ=Asia/Seoul
+    networks:
+      - hls-player
+    ports:
+      - 3000:3000
+    volumes:
+      - ./stream:/opt/app/stream
+  
+  proxy:
+    container_name: hls-player-proxy-local
+    image: hls-player-proxy-local:latest
+    restart: always
+    networks:
+      - hls-player
+    ports:
+      - 1935:1935
+    
+networks:
+  hls-player:
+    external: true
