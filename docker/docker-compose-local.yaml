@@ -23,6 +23,9 @@ services:
       - hls-player
     ports:
       - 1935:1935
+      - 8080:8080
+    volumes:
+      - ./hls:/tmp/hls
     
 networks:
   hls-player:
